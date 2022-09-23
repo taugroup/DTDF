@@ -1,0 +1,53 @@
+<!-- [ Layout sidenav ] Start -->
+<div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
+    <div class="app-brand demo">
+                    <span class="app-brand-logo">
+                        <img src="/static/portal/img/logo.png" alt="Brand Logo" class="img-fluid">
+                    </span>
+        <a href="{% url "home" %}"
+           class="app-brand-text demo sidenav-text font-weight-normal ml-2">TAMU OREC</a>
+        <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+            <i class="ion ion-md-menu align-middle"></i>
+        </a>
+    </div>
+    <div class="sidenav-divider mt-0"></div>
+
+    <!-- Links -->
+    <ul class="sidenav-inner py-1">
+
+        {% load activetab_tags %}
+
+        <!-- Project List -->
+        <li class="sidenav-item {% active request '^/project' %}">
+            <a href="{% url "project_list" %}" class="sidenav-link">
+                <i class="sidenav-icon feather icon-paperclip"></i>
+                <div>Projects</div>
+            </a>
+        </li>
+{#        <!-- Keywords -->#}
+{#        <li class="sidenav-item {% active request '^/keyword' %}">#}
+{#            <a href="{% url "keyword_list" %}" class="sidenav-link">#}
+{#                <i class="sidenav-icon feather icon-tag"></i>#}
+{#                <div>Keywords</div>#}
+{#            </a>#}
+{#        </li>#}
+
+        <!-- Tasks -->
+{#        <li class="sidenav-item {% active request '^/task' %}">#}
+{#            <a href="{% url "task_list" %}" class="sidenav-link">#}
+{#                <i class="sidenav-icon feather icon-check-circle"></i>#}
+{#                <div>Tasks</div>#}
+{#            </a>#}
+{#        </li>#}
+        <!-- Tasks -->
+{#        {% if user.is_superuser %}#}
+{#            <li class="sidenav-item {% active request '^/task' %}">#}
+{#                <a href="{% url "task_list" %}" class="sidenav-link">#}
+{#                    <i class="sidenav-icon feather icon-check-circle"></i>#}
+{#                    <div>Tasks</div>#}
+{#                </a>#}
+{#            </li>#}
+{#        {% endif %}#}
+    </ul>
+</div>
+<!-- [ Layout sidenav ] End -->
