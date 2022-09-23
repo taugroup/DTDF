@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="material-style layout-fixed">
+{% include 'includes/header.html' %}
+<link rel="stylesheet" href="/static/portal/css/pages/authentication.css">
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <!-- Image and text -->
+        <a class="navbar-brand" href="#">
+            <img src="/static/portal/img/logo.png" alt="Brand Logo" class="img-fluid">
+            <a class="navbar-brand" href="#">TAMU OREC</a>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Documents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FAQ</a>
+                </li>
+            </ul>
+            <a href=" {% url "login" %}" title="New Input">
+                <button type="button" class="btn btn-white waves-effect float-right">
+                    <i class="feather icon-user"></i> &nbsp; Login
+                </button>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<body>
+<!-- [ Preloader ] Start -->
+<div class="page-loader">
+    <div class="bg-primary"></div>
+</div>
+<!-- [ Preloader ] End -->
+
+<!-- [ Layout wrapper ] Start -->
+<div class="page-loader">
+    <div class="bg-primary"></div>
+</div>
+<!-- [ Preloader ] End -->
+
+<!-- [ content ] Start -->
+<div class="authentication-wrapper authentication-1 px-4">
+    <div class="authentication-inner py-5">
+
+        <!-- [ Logo ] Start -->
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="ui-w-60">
+                <div class="w-100 position-relative">
+                    <i class="lnr lnr-lock display-4 text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <!-- [ Logo ] End -->
+
+        <!-- [ Form ] Start -->
+        <form class="my-5" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center text-muted">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+
+        </form>
+        <!-- [ Form ] End -->
+
+{#        <div class="text-center text-muted">#}
+{#            <a class="hover:text-blue-500" href="{% url 'signup' %}">Don't have an account?</a>#}
+{#        </div>#}
+    </div>
+
+    <div class="text-center text-muted">
+
+    </div>
+</div>
+<!-- [ Layout wrapper] End -->
+{% include 'includes/scripts.html' %}
+    <nav class="layout-footer fixed-bottom bg-white">
+        <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+            <div class="pt-3">
+                <div>
+                    <a href="https://orec.tamu.edu/" class="footer-link pt-3 ml-4">Texas A&M OREC</a>
+                    <a href="http://library.tamu.edu/about/compliance.html" class="footer-link pt-3 ml-4">Site
+                        Policies</a>
+                    <a href="https://library.tamu.edu/services/accessibility.html" class="footer-link pt-3 ml-4">Accessibility</a>
+                </div>
+            </div>
+            <div class="pt-3">
+            <span class="footer-text font-weight-semibold"><a href="https://tamids.tamu.edu"
+                                                              class="footer-link"
+                                                              target="_blank">
+                <img class="class=d-block ui-w-100" src="/static/portal/img/TAMIDS_logo.png"/></a></span>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>

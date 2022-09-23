@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="material-style layout-fixed">
+{% include 'includes/header.html' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/static/portal/css/carousel.css">
+{% endblock stylesheets %}
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <!-- Image and text -->
+        <a class="navbar-brand" href="#">
+            <img src="/static/portal/img/logo.png" alt="Brand Logo" class="img-fluid">
+            <a class="navbar-brand" href="#">TAMU OREC</a>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Documents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FAQ</a>
+                </li>
+            </ul>
+            <a href=" {% url "login" %}" title="New Input">
+                <button type="button" class="btn btn-white waves-effect float-right">
+                    <i class="feather icon-user"></i> &nbsp; Login
+                </button>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<body>
+<!-- [ content ] Start -->
+<div class="authentication-wrapper authentication-1 px-4">
+    <div class="authentication-inner py-lg-5">
+        <!-- [ Logo ] Start -->
+        <div class="page-wrap d-flex flex-row align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="layout-footer fixed-bottom bg-white">
+    <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+        <div class="pt-3">
+            <div>
+                <a href="https://orec.tamu.edu/" class="footer-link pt-3 ml-4">Texas A&M OREC</a>
+                <a href="http://library.tamu.edu/about/compliance.html" class="footer-link pt-3 ml-4">Site
+                    Policies</a>
+                <a href="https://library.tamu.edu/services/accessibility.html" class="footer-link pt-3 ml-4">Accessibility</a>
+            </div>
+        </div>
+        <div class="pt-3">
+            <span class="footer-text font-weight-semibold"><a href="https://tamids.tamu.edu"
+                                                              class="footer-link"
+                                                              target="_blank">
+                <img class="class=d-block ui-w-100" src="/static/portal/img/TAMIDS_logo.png"/></a></span>
+        </div>
+    </div>
+</nav>
+</body>
+{% include 'includes/scripts.html' %}
+</html>

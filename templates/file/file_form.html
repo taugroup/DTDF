@@ -1,0 +1,115 @@
+{% extends "file/base.html" %}
+
+{% block page_title %}
+    <i class="feather icon-list"></i>&nbsp;&nbsp;File list of Project
+    <a href="{% url 'project_detail' project.id %}" title="View the details of this project">{{ project | upper }}</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if project.file_set.count < max_number_files_per_project %}
+                <div class="card mb-6">
+                    <h5 class="card-header">Upload Files</h5>
+                    <div class="card-body">
+                        <div class="row no-gutters row-bordered row-border-light h-100">
+                            <form class="form-inline mb-4" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="file" name='file_list' multiple>
+                                <button type="submit" class="btn btn-primary"><i class="feather icon-upload"></i>&nbsp;
+                                    Upload
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'project_list' %}"
+                   title="Back to project list">
+                    <button class="btn btn-primary">
+                        <i class="feather icon-paperclip"></i>&nbsp; Project List
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Existing Files</h5>
+                <div class="card-body table-responsive">
+                    <table id="document_table" class="table table-striped table-bordered text-wrap" style="width:100%">
+                        <thead class="text-secondary">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Text</th>
+                        {% if project.user == request.user or user.is_superuser %}
+                            <th>Actions</th>
+                        {% endif %}
+                        </thead>
+                        <tbody>
+                        {% for d in file_list %}
+                            {% if d %}
+                                <tr>
+                                    <td>{{ d.id }}</td>
+                                    <td>
+                                        {% if d.status == "finished" %}
+{#                                            <a href="{% url 'file_detail' d.id %}">#}
+{#                                                <button class="btn btn-success" style="margin:0 0 5px 5px;">#}
+{#                                                    <i class="feather icon-file-text"></i>&nbsp; {{ d.name }}#}
+{#                                                </button>#}
+{#                                            </a>#}
+                                        {% else %}
+                                            <button class="btn
+                                        {% if d.status == "running" %}
+                                        btn-warning
+                                        {% elif d.status == "queued" %}
+                                        btn-info
+                                        {% endif %}
+                                        " style="margin:0 0 5px 5px;">
+                                            <i class="feather icon-check-circle"></i>&nbsp;{{ d.name }}
+                                                <span class="badge">{{ d.status }}</span>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ d.text | truncatewords:10 }}
+                                    </td>
+                                    <td style="width:60px">
+                                        {% if project.user == request.user or user.is_superuser %}
+                                            <a href="{% url 'file_delete' d.id %}"
+                                               title="Delete this file?">
+                                                <i class="feather icon-x text-danger"></i>
+                                            </a>
+{#                                            <a href="{% url 'file_detail' d.id %}"#}
+{#                                               title="View the details of this file">#}
+{#                                                <i class="feather icon-search text-primary"></i>#}
+{#                                            </a>#}
+                                            <a href="{{ d.file.url }}" download>
+                                                <i class="feather icon-download text-info"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('#document_table').DataTable({
+                "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+            });
+        });
+    </script>
+{% endblock javascripts %}
